@@ -1,4 +1,6 @@
-// There is no easy way to have the composite build publish all the things!
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '2.0.21'
+}// There is no easy way to have the composite build publish all the things!
 // For publication to Maven Central see scripts directory
 task publishAllToMavenLocal {
     dependsOn gradle.includedBuild('vdm-animation').task(':vdm-animation-api:publishToMavenLocal')
@@ -16,4 +18,13 @@ task publishAllToMavenLocal {
     dependsOn ':azuki-verify:azuki-batch-guided:publishToMavenLocal'
     dependsOn ':azuki-verify:azuki-orchestrator:publishToMavenLocal'
     dependsOn ':azuki-verify:azuki-generation-utilities:publishToMavenLocal'
+}
+repositories {
+    mavenCentral()
+}
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+}
+kotlin {
+    jvmToolchain(8)
 }
