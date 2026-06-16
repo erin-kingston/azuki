@@ -3,7 +3,6 @@ package com.anaplan.engineering.azuki.mondex.adapter.api
 import com.anaplan.engineering.azuki.core.system.Action
 import com.anaplan.engineering.azuki.core.system.ActionFactory
 import com.anaplan.engineering.azuki.core.system.ParallelActionFactory
-import com.anaplan.engineering.azuki.core.system.UnsupportedAction
 
 
 interface MondexActionFactory<out A: Action > : ActionFactory, ParallelActionFactory<A> {
@@ -12,11 +11,11 @@ interface MondexActionFactory<out A: Action > : ActionFactory, ParallelActionFac
 }
 
 interface PurseActionFactory {
-    fun create(balance: Int, lost: Int): Action = UnsupportedAction
+    fun create(balance: Int, lost: Int): Action
 }
 
 interface WorldActionFactory {
-    fun create(authPurses: Map<String, Pair<Int, Int>>) = UnsupportedAction
-    fun absTransfer(transferDetails: Triple<String, String, Int>) = UnsupportedAction
-    fun absIgnore() = UnsupportedAction
+    fun create(authPurses: Map<String, Pair<Int, Int>>): Action
+    fun absTransfer(transferDetails: Triple<String, String, Int>): Action
+    fun absIgnore(): Action
 }
