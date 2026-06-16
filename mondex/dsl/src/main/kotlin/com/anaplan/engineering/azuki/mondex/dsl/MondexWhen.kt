@@ -17,15 +17,15 @@ class MondexWhen(private val actionFactory: MondexActionFactory<*>) :
 
     override fun actions() = actionList
 
-    override fun createPurse(balance: Int, lost: Int) {
+    override fun createPurse(balance: ULong, lost: ULong) {
         actionList.add(actionFactory.purse.create(balance, lost))
     }
 
-    override fun createWorld(authPurses: Map<String, Pair<Int, Int>>) {
+    override fun createWorld(authPurses: Map<String, Pair<ULong, ULong>>) {
         actionList.add(actionFactory.world.create(authPurses))
     }
 
-    override fun absTransfer(transferDetails: Triple<String, String, Int>) {
+    override fun absTransfer(transferDetails: Triple<String, String, ULong>) {
         actionList.add(actionFactory.world.absTransfer(transferDetails))
     }
 

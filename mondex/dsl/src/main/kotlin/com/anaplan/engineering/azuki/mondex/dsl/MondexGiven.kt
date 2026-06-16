@@ -14,29 +14,29 @@ class MondexGiven(private val actionFactory: MondexActionFactory<*>) : Given<Mon
 
     override fun actions(): List<Action> = actionList
 
-    override fun thereIsAPurse(balance: Int, lost: Int) {
+    override fun thereIsAPurse(balance: ULong, lost: ULong) {
         actionList.add(actionFactory.purse.create(balance, lost))
     }
 
-    override fun thereIsAPurse(balance: Int, lost: Int, init: PurseBlock.() -> Unit) {
+    override fun thereIsAPurse(balance: ULong, lost: ULong, init: PurseBlock.() -> Unit) {
         actionList.add(actionFactory.purse.create(balance, lost))
         val purseBlock = PurseBlock(balance, lost, actionFactory)
         purseBlock.init()
         actionList.addAll(purseBlock.actions())
     }
 
-    override fun thereIsAWorld(authPurses: Map<String, Pair<Int, Int>>) {
+    override fun thereIsAWorld(authPurses: Map<String, Pair<ULong, ULong>>) {
         actionList.add(actionFactory.world.create(authPurses))
     }
 
-    override fun thereIsAWorld(authPurses: Map<String, Pair<Int, Int>>, init: WorldBlock.() -> Unit) {
+    override fun thereIsAWorld(authPurses: Map<String, Pair<ULong, ULong>>, init: WorldBlock.() -> Unit) {
         actionList.add(actionFactory.world.create(authPurses))
         val worldBlock = WorldBlock(authPurses, actionFactory)
         worldBlock.init()
         actionList.addAll(worldBlock.actions())
     }
 
-    override fun absTransfer(transferDetails: Triple<String, String, Int>) {
+    override fun absTransfer(transferDetails: Triple<String, String, ULong>) {
         actionList.add(actionFactory.world.absTransfer(transferDetails))
     }
 

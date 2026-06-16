@@ -10,6 +10,12 @@ class KazukiCheckFactory : MondexCheckFactory {
     override fun purseExists(purseName: String, result: Boolean) =
         PurseExistsCheck(purseName, result)
 
+    override fun purseExists(purseName: String, balance: ULong, lost: ULong, result: Boolean) =
+        PurseExistsWithValuesCheck(purseName, balance, lost, result)
+
+    override fun worldExists(authPurses: Map<String, Pair<ULong, ULong>>, result: Boolean) =
+        WorldExistsCheck(authPurses, result)
+
     override fun systemValid() = object : KazukiCheck {
         override val behavior = unsupportedBehavior
         override fun check(env: ExecutionEnvironment) = true

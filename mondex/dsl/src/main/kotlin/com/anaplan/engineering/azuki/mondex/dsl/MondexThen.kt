@@ -15,4 +15,12 @@ class MondexThen(private val checkFactory: MondexCheckFactory) : Then<MondexChec
     override fun purseExists(purseName: String) {
         checkList.add(checkFactory.purseExists(purseName, true))
     }
+
+    override fun purseExists(purseName: String, balance: ULong, lost: ULong) {
+        checkList.add(checkFactory.purseExists(purseName, balance, lost, true))
+    }
+
+    override fun worldExists(authPurses: Map<String, Pair<ULong, ULong>>) {
+        checkList.add(checkFactory.worldExists(authPurses, true))
+    }
 }

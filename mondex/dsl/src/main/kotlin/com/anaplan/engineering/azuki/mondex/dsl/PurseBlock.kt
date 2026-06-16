@@ -6,8 +6,8 @@ import com.anaplan.engineering.azuki.mondex.adapter.api.MondexActionFactory
 
 @ScenarioDsl
 class PurseBlock(
-    private val balance: Int,
-    private val lost: Int,
+    private val balance: ULong,
+    private val lost: ULong,
     private val actionFactory: MondexActionFactory<*>
 ) {
     private val actionList = mutableListOf<Action>()

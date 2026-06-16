@@ -6,12 +6,12 @@ import com.anaplan.engineering.azuki.mondex.adapter.declaration.declaration.Worl
 
 class MondexDeclarationState : DeclarationState() {
 
-    fun declareWorld(worldName: String, authPurses: Map<String, Pair<Int, Int>>) {
+    fun declareWorld(worldName: String, authPurses: Map<String, Pair<ULong, ULong>>) {
         checkForDuplicate(worldName)
         declarations[worldName] = WorldDeclaration(worldName, authPurses, emptyList(), standalone = true)
     }
 
-    fun applyTransfer(worldName: String, transferDetails: Triple<String, String, Int>) {
+    fun applyTransfer(worldName: String, transferDetails: Triple<String, String, ULong>) {
         val world = getDeclaration<WorldDeclaration>(worldName)
         declarations[worldName] = world.copy(
             operations = world.operations + WorldOperation.Transfer(

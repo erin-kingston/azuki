@@ -7,9 +7,10 @@ import com.anaplan.engineering.azuki.mondex.kazuki.Transfer_Module.mk_Transfer
 import com.anaplan.engineering.azuki.mondex.kazuki.World_Module.mk_World
 import com.anaplan.engineering.azuki.mondex.kazuki.abstractNullInput
 import com.anaplan.engineering.azuki.mondex.adapter.declaration.declaration.WorldOperation
-import com.anaplan.engineering.kazuki.core.mk_
-import com.anaplan.engineering.kazuki.core.mapping
-import com.anaplan.engineering.kazuki.core.toNat
+import com.anaplan.engineering.azuki.mondex.kazuki.Purse
+import com.anaplan.engineering.kazuki.core.*
+import kotlin.collections.component1
+import kotlin.collections.component2
 
 class EnvironmentBuilder {
 
@@ -43,18 +44,18 @@ class ExecutionEnvironment {
 }
 
 fun buildWorld(
-    authPurses: Map<String, Pair<Int, Int>>,
+    authPurses: Map<String, Pair<ULong, ULong>>,
     operations: List<WorldOperation> = emptyList(),
 ): World {
     var world = mk_World(
         mapping(authPurses.entries) { (name, purse) ->
-            mk_(name, mk_Purse(purse.first.toNat(), purse.second.toNat()))
+            mk_(name, mk_Purse(purse.first, purse.second))
         },
     )
     operations.forEach { operation ->
         world = when (operation) {
             is WorldOperation.Transfer -> {
-                val transferDetails = mk_TransferDetails(operation.from, operation.to, operation.value.toNat())
+                val transferDetails = mk_TransferDetails(operation.from, operation.to, operation.value)
                 val input = mk_Transfer(transferDetails)
                 world.functions.abstractTransferOkayTD(input, transferDetails)
             }
@@ -65,5 +66,9 @@ fun buildWorld(
     return world
 }
 
-fun Triple<String, String, Int>.toTransferDetails() =
-    mk_TransferDetails(first, second, third.toNat())
+fun Triple<String, String, ULong>.toTransferDetails() =
+    mk_TransferDetails(first, second, third)
+
+fun Map<String, Pair<ULong, ULong>>.toMapping() =
+    mapping(this.entries) { (name, purse) ->
+        mk_(name, mk_Purse(purse.first, purse.second)) }

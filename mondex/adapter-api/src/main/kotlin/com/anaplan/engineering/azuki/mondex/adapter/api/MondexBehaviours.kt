@@ -7,6 +7,7 @@ object MondexBehaviours {
     const val CreatePurse = 1
     const val CreateWorld = 2
     const val PurseExists = 3
+    const val WorldExists = 4
 }
 
 open class CreatePurseBehaviour : ReifiedBehavior {
@@ -27,4 +28,8 @@ open class AbsIgnoreBehaviour : ReifiedBehavior {
 
 open class PurseExistsBehaviour : ReifiedBehavior {
     override val behavior = MondexBehaviours.PurseExists
+}
+
+open class WorldExistsBehaviour : ReifiedBehavior {
+    override val behavior = MondexBehaviours.WorldExists
 }

@@ -17,13 +17,13 @@ class KazukiActionFactory : MondexActionFactory<KazukiAction> {
 }
 
 object KazukiPurseActionFactory : PurseActionFactory {
-    override fun create(balance: Int, lost: Int) = UnsupportedAction
+    override fun create(balance: ULong, lost: ULong) = UnsupportedAction
 }
 
 object KazukiWorldActionFactory : WorldActionFactory {
-    override fun create(authPurses: Map<String, Pair<Int, Int>>) = CreateWorldAction(authPurses)
+    override fun create(authPurses: Map<String, Pair<ULong, ULong>>) = CreateWorldAction(authPurses)
 
-    override fun absTransfer(transferDetails: Triple<String, String, Int>) =
+    override fun absTransfer(transferDetails: Triple<String, String, ULong>) =
         AbsTransferAction(transferDetails)
 
     override fun absIgnore() = AbsIgnoreAction()

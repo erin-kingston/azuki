@@ -11,11 +11,11 @@ interface MondexActionFactory<out A: Action > : ActionFactory, ParallelActionFac
 }
 
 interface PurseActionFactory {
-    fun create(balance: Int, lost: Int): Action
+    fun create(balance: ULong, lost: ULong): Action
 }
 
 interface WorldActionFactory {
-    fun create(authPurses: Map<String, Pair<Int, Int>>): Action
-    fun absTransfer(transferDetails: Triple<String, String, Int>): Action
+    fun create(authPurses: Map<String, Pair<ULong, ULong>>): Action
+    fun absTransfer(transferDetails: Triple<String, String, ULong>): Action
     fun absIgnore(): Action
 }

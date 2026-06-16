@@ -5,7 +5,7 @@ import com.anaplan.engineering.azuki.mondex.adapter.kazuki.ExecutionEnvironment
 import com.anaplan.engineering.azuki.mondex.adapter.kazuki.buildWorld
 
 class CreateWorldAction(
-    authPurses: Map<String, Pair<Int, Int>>,
+    authPurses: Map<String, Pair<ULong, ULong>>,
     worldName: String = DEFAULT_WORLD,
 ) : CreateWorldDeclarableAction(authPurses, worldName), KazukiAction {
 

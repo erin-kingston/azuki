@@ -5,11 +5,11 @@ import com.anaplan.engineering.azuki.mondex.dsl.PurseBlock
 import com.anaplan.engineering.azuki.mondex.dsl.WorldBlock
 
 interface PurseDeclarations {
-    fun thereIsAPurse(balance: Int, lost: Int)
-    fun thereIsAPurse(balance: Int, lost: Int, init: PurseBlock.() -> Unit)
+    fun thereIsAPurse(balance: ULong, lost: ULong)
+    fun thereIsAPurse(balance: ULong, lost: ULong, init: PurseBlock.() -> Unit)
 }
 
 interface WorldDeclarations {
-    fun thereIsAWorld(authPurses: Map<String, Pair<Int, Int>>)
-    fun thereIsAWorld(authPurses: Map<String, Pair<Int, Int>>, init: WorldBlock.() -> Unit)
+    fun thereIsAWorld(authPurses: Map<String, Pair<ULong, ULong>>)
+    fun thereIsAWorld(authPurses: Map<String, Pair<ULong, ULong>>, init: WorldBlock.() -> Unit)
 }

@@ -6,14 +6,14 @@ import com.anaplan.engineering.azuki.mondex.adapter.api.MondexActionFactory
 
 @ScenarioDsl
 class WorldBlock(
-    private val authPurses: Map<String, Pair<Int, Int>>,
+    private val authPurses: Map<String, Pair<ULong, ULong>>,
     private val actionFactory: MondexActionFactory<*>,
 ) {
     private val actionList = mutableListOf<Action>()
 
     fun actions(): List<Action> = actionList
 
-    fun absTransfer(transferDetails: Triple<String, String, Int>) {
+    fun absTransfer(transferDetails: Triple<String, String, ULong>) {
         actionList.add(actionFactory.world.absTransfer(transferDetails))
     }
 

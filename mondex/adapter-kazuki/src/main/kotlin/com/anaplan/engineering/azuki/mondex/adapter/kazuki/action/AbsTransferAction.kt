@@ -6,7 +6,7 @@ import com.anaplan.engineering.azuki.mondex.adapter.kazuki.toTransferDetails
 import com.anaplan.engineering.azuki.mondex.kazuki.Transfer_Module.mk_Transfer
 
 class AbsTransferAction(
-    transferDetails: Triple<String, String, Int>,
+    transferDetails: Triple<String, String, ULong>,
     worldName: String = DEFAULT_WORLD,
 ) : AbsTransferDeclarableAction(transferDetails, worldName), KazukiAction {
 

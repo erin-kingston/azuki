@@ -5,7 +5,7 @@ import com.anaplan.engineering.azuki.mondex.adapter.api.AbsTransferBehaviour
 import com.anaplan.engineering.azuki.mondex.adapter.declaration.MondexDeclarationState
 
 open class AbsTransferDeclarableAction(
-    protected val transferDetails: Triple<String, String, Int>,
+    protected val transferDetails: Triple<String, String, ULong>,
     protected val worldName: String = MondexDeclarationState.DEFAULT_WORLD,
 ) : AbsTransferBehaviour(), DeclarableAction<MondexDeclarationState> {
 
