@@ -1,17 +1,18 @@
 package com.anaplan.engineering.azuki.mondex.adapter.kazuki.action
 
+import com.anaplan.engineering.azuki.mondex.adapter.api.TransferDetails
 import com.anaplan.engineering.azuki.mondex.adapter.declaration.action.TransferDeclarableAction
 import com.anaplan.engineering.azuki.mondex.adapter.kazuki.ExecutionEnvironment
-import com.anaplan.engineering.azuki.mondex.adapter.kazuki.toTransferDetails
+import com.anaplan.engineering.azuki.mondex.kazuki.TransferDetails_Module.mk_TransferDetails
 import com.anaplan.engineering.azuki.mondex.kazuki.Transfer_Module.mk_Transfer
 
 class TransferLostAction(
-    transferDetails: Triple<String, String, ULong>,
+    transferDetails: TransferDetails,
     worldName: String = DEFAULT_WORLD
 ) : TransferDeclarableAction(transferDetails, worldName), KazukiAction {
 
     override fun act(env: ExecutionEnvironment) {
-        val td = transferDetails.toTransferDetails()
+        val td = mk_TransferDetails(transferDetails.fromPurse, transferDetails.toPurse, transferDetails.value)
         val input = mk_Transfer(td)
         env.set(worldName, env.world(worldName).functions.abstractTransferLostTD(input, td))
     }

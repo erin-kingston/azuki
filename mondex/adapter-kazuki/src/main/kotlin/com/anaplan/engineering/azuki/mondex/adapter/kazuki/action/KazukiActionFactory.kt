@@ -5,6 +5,7 @@ import com.anaplan.engineering.azuki.core.system.ParallelAction
 import com.anaplan.engineering.azuki.core.system.UnsupportedAction
 import com.anaplan.engineering.azuki.mondex.adapter.api.MondexActionFactory
 import com.anaplan.engineering.azuki.mondex.adapter.api.PurseActionFactory
+import com.anaplan.engineering.azuki.mondex.adapter.api.TransferDetails
 import com.anaplan.engineering.azuki.mondex.adapter.api.WorldActionFactory
 import com.anaplan.engineering.azuki.mondex.adapter.kazuki.ExecutionEnvironment
 
@@ -23,16 +24,16 @@ object KazukiPurseActionFactory : PurseActionFactory {
 object KazukiWorldActionFactory : WorldActionFactory {
     override fun create(authPurses: Map<String, Pair<ULong, ULong>>) = CreateWorldAction(authPurses)
 
-    override fun transferOkay(transferDetails: Triple<String, String, ULong>) =
+    override fun transferOkay(transferDetails: TransferDetails) =
         TransferOkayAction(transferDetails)
 
-    override fun transferLost(transferDetails: Triple<String, String, ULong>) =
+    override fun transferLost(transferDetails: TransferDetails) =
         TransferLostAction(transferDetails)
 
     override fun noTransfer() = IgnoreAction()
 
-    override fun addPersonWithPurse(personName: String, purse: Pair<ULong, ULong>) =
-        AddPersonWithPurseAction(personName, purse)
+    override fun addPersonWithPurse(personName: String, balance: ULong, lost: ULong) =
+        AddPersonWithPurseAction(personName, balance, lost)
 }
 
 interface KazukiAction : Action {

@@ -7,12 +7,13 @@ import com.anaplan.engineering.kazuki.core.*
 
 class AddPersonWithPurseAction(
     personName: String,
-    purse: Pair<ULong, ULong>,
+    balance: ULong,
+    lost: ULong,
     worldName: String = DEFAULT_WORLD,
-) : AddPersonWithPurseDeclarableAction(worldName, personName, purse), KazukiAction {
+) : AddPersonWithPurseDeclarableAction(worldName, personName, balance, lost), KazukiAction {
 
     override fun act(env: ExecutionEnvironment) {
-        env.set(worldName, env.world(worldName).authPurses * mk_Mapping(mk_(personName, mk_Purse(purse.first, purse.second))))
+        env.set(worldName, env.world(worldName).authPurses * mk_Mapping(mk_(personName, mk_Purse(balance, lost))))
     }
 
     companion object {

@@ -5,8 +5,6 @@ import com.anaplan.engineering.azuki.core.system.BEH
 import com.anaplan.engineering.azuki.mondex.adapter.api.MondexBehaviours
 import com.anaplan.engineering.azuki.mondex.adapter.api.MondexFunctionalElements
 import com.anaplan.engineering.azuki.mondex.dsl.MondexScenario
-import com.anaplan.engineering.azuki.mondex.dsl.purse
-import com.anaplan.engineering.azuki.mondex.dsl.transferDetails
 import com.anaplan.engineering.azuki.mondex.person1
 import com.anaplan.engineering.azuki.mondex.person2
 
@@ -19,19 +17,19 @@ class BEH1 : MondexScenario() {
     fun transferOkay() {
         given {
             thereIsAWorld {
-                personWithPurse(person1, purse(3, 0))
-                personWithPurse(person2, purse(2, 1))
+                personWithPurse(person1, 3, 0)
+                personWithPurse(person2, 2, 1)
             }
         }
         whenever {
-            thereIsATransfer(transferDetails(person1, person2, 3))
+            thereIsATransfer(person1, person2, 3)
         }
         then {
-            purseExists(person1, purse(0, 0))
-            purseExists(person2, purse(5, 1))
+            purseExists(person1, 0, 0)
+            purseExists(person2, 5, 1)
             worldExists {
-                personWithPurse(person1, purse(0, 0))
-                personWithPurse(person2, purse(5, 1))
+                personWithPurse(person1, 0, 0)
+                personWithPurse(person2, 5, 1)
             }
         }
     }

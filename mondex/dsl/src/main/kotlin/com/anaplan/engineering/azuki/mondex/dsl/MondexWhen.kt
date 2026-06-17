@@ -4,6 +4,7 @@ import com.anaplan.engineering.azuki.core.dsl.ParallelWhen
 import com.anaplan.engineering.azuki.core.dsl.When
 import com.anaplan.engineering.azuki.core.system.Action
 import com.anaplan.engineering.azuki.mondex.adapter.api.MondexActionFactory
+import com.anaplan.engineering.azuki.mondex.adapter.api.TransferDetails
 import com.anaplan.engineering.azuki.mondex.dsl.action.PurseActions
 import com.anaplan.engineering.azuki.mondex.dsl.action.WorldActions
 
@@ -25,13 +26,13 @@ class MondexWhen(private val actionFactory: MondexActionFactory<*>) :
 //        actionList.add(actionFactory.world.create(authPurses))
 //    }
 
-    override fun thereIsATransfer(transferDetails: TransferDetails, succeed: Boolean) {
+    override fun thereIsATransfer(fromPurse: String, toPurse: String, value: Int, succeed: Boolean) {
         when (succeed) {
             true -> actionList.add(actionFactory.world.transferOkay(
-                Triple(transferDetails.fromPurse, transferDetails.toPurse, transferDetails.value.toULong()))
+                TransferDetails(fromPurse, toPurse, value.toULong()))
             )
             false -> actionList.add(actionFactory.world.transferLost(
-                Triple(transferDetails.fromPurse, transferDetails.toPurse, transferDetails.value.toULong()))
+                TransferDetails(fromPurse, toPurse, value.toULong()))
             )
         }
     }

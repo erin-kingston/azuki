@@ -12,7 +12,8 @@ class WorldBlock(
 
     fun actions(): List<Action> = actionList
 
-    fun personWithPurse(personName: String, purse: Purse) {
-        actionList.add(actionFactory.world.addPersonWithPurse(personName, (purse.balance.toULong() to purse.lost.toULong())))
+    fun personWithPurse(personName: String, balance: Int, lost: Int) {
+        require(balance >= 0 && lost >= 0) { "Purse values must be zero or greater than zero." }
+        actionList.add(actionFactory.world.addPersonWithPurse(personName, balance.toULong(), lost.toULong()))
     }
 }

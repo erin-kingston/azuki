@@ -1,6 +1,7 @@
 package com.anaplan.engineering.azuki.mondex.adapter.declaration
 
 import com.anaplan.engineering.azuki.declaration.DeclarationState
+import com.anaplan.engineering.azuki.mondex.adapter.api.TransferDetails
 import com.anaplan.engineering.azuki.mondex.adapter.declaration.declaration.WorldDeclaration
 import com.anaplan.engineering.azuki.mondex.adapter.declaration.declaration.WorldOperation
 
@@ -11,13 +12,13 @@ class MondexDeclarationState : DeclarationState() {
         declarations[worldName] = WorldDeclaration(worldName, authPurses, emptyList(), standalone = true)
     }
 
-    fun applyTransfer(worldName: String, transferDetails: Triple<String, String, ULong>) {
+    fun applyTransfer(worldName: String, transferDetails: TransferDetails) {
         val world = getDeclaration<WorldDeclaration>(worldName)
         declarations[worldName] = world.copy(
             operations = world.operations + WorldOperation.Transfer(
-                transferDetails.first,
-                transferDetails.second,
-                transferDetails.third,
+                transferDetails.fromPurse,
+                transferDetails.toPurse,
+                transferDetails.value,
             ),
         )
     }
@@ -29,10 +30,10 @@ class MondexDeclarationState : DeclarationState() {
         )
     }
 
-    fun applyNewPersonWithPurse(worldName: String, personName: String, purse: Pair<ULong, ULong>) {
+    fun applyNewPersonWithPurse(worldName: String, personName: String, balance: ULong, lost: ULong) {
         val world = getDeclaration<WorldDeclaration>(worldName)
         declarations[worldName] = world.copy(
-            operations = (world.operations + WorldOperation.AddPersonWithPurse(personName, purse))
+            operations = (world.operations + WorldOperation.AddPersonWithPurse(personName, balance, lost))
         )
     }
 

@@ -16,8 +16,9 @@ class MondexThen(private val checkFactory: MondexCheckFactory) : Then<MondexChec
         checkList.add(checkFactory.purseExists(personName, true))
     }
 
-    override fun purseExists(personName: String, purse: Purse) {
-        checkList.add(checkFactory.purseExists(personName, purse.balance.toULong(), purse.lost.toULong(), true))
+    override fun purseExists(personName: String, balance: Int, lost: Int) {
+        require(balance >= 0 && lost >= 0) { "Balance and lost must be greater than or equal to 0" }
+        checkList.add(checkFactory.purseExists(personName, balance.toULong(), lost.toULong(), true))
     }
 
     override fun worldExists(init: WorldCheckBlock.() -> Unit) {

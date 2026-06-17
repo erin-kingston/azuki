@@ -8,6 +8,7 @@ import com.anaplan.engineering.azuki.mondex.kazuki.World_Module.mk_World
 import com.anaplan.engineering.azuki.mondex.kazuki.abstractNullInput
 import com.anaplan.engineering.azuki.mondex.adapter.declaration.declaration.WorldOperation
 import com.anaplan.engineering.azuki.mondex.kazuki.Purse
+import com.anaplan.engineering.azuki.mondex.kazuki.TransferDetails
 import com.anaplan.engineering.azuki.mondex.kazuki.World_Module.transform
 import com.anaplan.engineering.kazuki.core.*
 import kotlin.collections.component1
@@ -62,7 +63,7 @@ fun buildWorld(
             }
 
             is WorldOperation.AddPersonWithPurse -> {
-                world.transform(world.authPurses * mk_Mapping(mk_(operation.name, mk_Purse(operation.purse.first, operation.purse.second))))
+                world.transform(world.authPurses * mk_Mapping(mk_(operation.name, mk_Purse(operation.balance, operation.lost))))
             }
 
             WorldOperation.Ignore -> world.functions.abstractIgnore(abstractNullInput)
@@ -70,9 +71,6 @@ fun buildWorld(
     }
     return world
 }
-
-fun Triple<String, String, ULong>.toTransferDetails() =
-    mk_TransferDetails(first, second, third)
 
 fun Map<String, Pair<ULong, ULong>>.toMapping() =
     mapping(this.entries) { (name, purse) ->

@@ -7,8 +7,9 @@ import com.anaplan.engineering.azuki.mondex.adapter.declaration.MondexDeclaratio
 open class AddPersonWithPurseDeclarableAction(
     protected val worldName: String = MondexDeclarationState.DEFAULT_WORLD,
     protected val personName: String,
-    protected val purse: Pair<ULong, ULong>
+    protected val balance: ULong,
+    protected val lost: ULong,
 ) : AddPersonWithPurseBehaviour(), DeclarableAction<MondexDeclarationState> {
 
-    override fun declare(state: MondexDeclarationState) = state.applyNewPersonWithPurse(worldName, personName, purse)
+    override fun declare(state: MondexDeclarationState) = state.applyNewPersonWithPurse(worldName, personName, balance, lost)
 }

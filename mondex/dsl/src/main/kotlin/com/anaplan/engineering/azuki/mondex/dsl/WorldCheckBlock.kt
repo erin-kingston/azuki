@@ -14,9 +14,10 @@ class WorldCheckBlock(
     fun checks(): List<Check> = checkList
     fun getAuthPurses(): Map<String, Pair<ULong, ULong>> = authPurses
 
-    fun personWithPurse(personName: String, purse: Purse) {
-        checkList.add(checkFactory.purseExists(personName, purse.balance.toULong(), purse.lost.toULong(), true))
-        authPurses[personName] = (purse.balance.toULong() to purse.lost.toULong())
+    fun personWithPurse(personName: String, balance: Int, lost: Int) {
+        require(balance >= 0 && lost >= 0) { "Balance and lost must be greater than or equal to 0" }
+        checkList.add(checkFactory.purseExists(personName, balance.toULong(), lost.toULong(), true))
+        authPurses[personName] = (balance.toULong() to lost.toULong())
     }
 
 }
