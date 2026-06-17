@@ -33,3 +33,7 @@ open class PurseExistsBehaviour : ReifiedBehavior {
 open class WorldExistsBehaviour : ReifiedBehavior {
     override val behavior = MondexBehaviours.WorldExists
 }
+
+open class AddPersonWithPurseBehaviour : ReifiedBehavior {
+    override val behavior = MondexFunctions.AddPersonWithPurse
+}

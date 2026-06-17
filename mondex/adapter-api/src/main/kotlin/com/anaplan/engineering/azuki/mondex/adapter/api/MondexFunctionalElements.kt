@@ -21,4 +21,7 @@ object MondexFunctions {
 
     @IsA(WorldFunction)
     const val AbsIgnore = 5
+
+    @IsA(WorldFunction)
+    const val AddPersonWithPurse = 6
 }

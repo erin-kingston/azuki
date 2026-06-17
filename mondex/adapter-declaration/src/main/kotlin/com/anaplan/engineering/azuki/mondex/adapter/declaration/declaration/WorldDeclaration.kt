@@ -12,4 +12,5 @@ data class WorldDeclaration(
 sealed interface WorldOperation {
     data class Transfer(val from: String, val to: String, val value: ULong) : WorldOperation
     data object Ignore : WorldOperation
+    data class AddPersonWithPurse(val name: String, val purse: Pair<ULong, ULong>) : WorldOperation
 }

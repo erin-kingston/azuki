@@ -18,4 +18,5 @@ interface WorldActionFactory {
     fun create(authPurses: Map<String, Pair<ULong, ULong>>): Action
     fun absTransfer(transferDetails: Triple<String, String, ULong>): Action
     fun absIgnore(): Action
+    fun addPersonWithPurse(personName: String, purse: Pair<ULong, ULong>): Action
 }

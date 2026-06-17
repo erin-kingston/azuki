@@ -6,18 +6,13 @@ import com.anaplan.engineering.azuki.mondex.adapter.api.MondexActionFactory
 
 @ScenarioDsl
 class WorldBlock(
-    private val authPurses: Map<String, Pair<ULong, ULong>>,
     private val actionFactory: MondexActionFactory<*>,
 ) {
     private val actionList = mutableListOf<Action>()
 
     fun actions(): List<Action> = actionList
 
-    fun absTransfer(transferDetails: Triple<String, String, ULong>) {
-        actionList.add(actionFactory.world.absTransfer(transferDetails))
-    }
-
-    fun absIgnore() {
-        actionList.add(actionFactory.world.absIgnore())
+    fun personWithPurse(name: String, purse: Pair<ULong, ULong>) {
+        actionList.add(actionFactory.world.addPersonWithPurse(name, purse))
     }
 }

@@ -14,15 +14,18 @@ class BEH1 : MondexScenario() {
     @Eac("Transfer between authentic purses succeeds")
     fun transferOkay() {
         given {
-            thereIsAWorld(mapOf("person1" to (3UL to 0UL), "person2" to (1UL to 0UL)))
+            thereIsAWorld {
+                personWithPurse("person1", (3UL to 0UL))
+                personWithPurse("person2", (2UL to 1UL))
+            }
         }
         whenever {
             absTransfer(Triple("person1", "person2", 3UL))
         }
         then {
-            purseExists("person1", 0UL, 0UL)
-            purseExists("person2", 4UL, 0UL)
-            worldExists(mapOf("person1" to (0UL to 0UL), "person2" to (4UL to 0UL)))
+            purseExists(purseName = "person1", 0UL, 0UL)
+            purseExists(purseName = "person2", 5UL, 1UL)
+            worldExists(mapOf("person1" to (0UL to 0UL), "person2" to (5UL to 1UL)))
         }
     }
 }

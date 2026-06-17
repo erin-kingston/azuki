@@ -29,6 +29,13 @@ class MondexDeclarationState : DeclarationState() {
         )
     }
 
+    fun applyNewPersonWithPurse(worldName: String, personName: String, purse: Pair<ULong, ULong>) {
+        val world = getDeclaration<WorldDeclaration>(worldName)
+        declarations[worldName] = world.copy(
+            operations = (world.operations + WorldOperation.AddPersonWithPurse(personName, purse))
+        )
+    }
+
     companion object {
         const val DEFAULT_WORLD = "world"
     }

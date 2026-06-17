@@ -27,6 +27,9 @@ object KazukiWorldActionFactory : WorldActionFactory {
         AbsTransferAction(transferDetails)
 
     override fun absIgnore() = AbsIgnoreAction()
+
+    override fun addPersonWithPurse(personName: String, purse: Pair<ULong, ULong>) =
+        AddPersonWithPurseAction(personName, purse)
 }
 
 interface KazukiAction : Action {
