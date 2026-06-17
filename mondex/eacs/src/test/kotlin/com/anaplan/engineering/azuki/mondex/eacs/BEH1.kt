@@ -6,6 +6,7 @@ import com.anaplan.engineering.azuki.mondex.adapter.api.MondexBehaviours
 import com.anaplan.engineering.azuki.mondex.adapter.api.MondexFunctionalElements
 import com.anaplan.engineering.azuki.mondex.dsl.MondexScenario
 import com.anaplan.engineering.azuki.mondex.dsl.purse
+import com.anaplan.engineering.azuki.mondex.dsl.transferDetails
 import com.anaplan.engineering.azuki.mondex.person1
 import com.anaplan.engineering.azuki.mondex.person2
 
@@ -23,7 +24,7 @@ class BEH1 : MondexScenario() {
             }
         }
         whenever {
-            absTransfer(Triple(person1, person2, 3UL))
+            thereIsATransfer(transferDetails(person1, person2, 3))
         }
         then {
             purseExists(person1, purse(0, 0))

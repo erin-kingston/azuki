@@ -26,11 +26,18 @@ class MondexGiven(private val actionFactory: MondexActionFactory<*>) : Given<Mon
         actionList.addAll(worldBlock.actions())
     }
 
-    override fun absTransfer(transferDetails: Triple<String, String, ULong>) {
-        actionList.add(actionFactory.world.absTransfer(transferDetails))
+    override fun thereIsATransfer(transferDetails: TransferDetails, succeed: Boolean) {
+        when (succeed) {
+            true -> actionList.add(actionFactory.world.transferOkay(
+                Triple(transferDetails.fromPurse, transferDetails.toPurse, transferDetails.value.toULong()))
+            )
+            false -> actionList.add(actionFactory.world.transferLost(
+                Triple(transferDetails.fromPurse, transferDetails.toPurse, transferDetails.value.toULong()))
+            )
+        }
     }
 
-    override fun absIgnore() {
-        actionList.add(actionFactory.world.absIgnore())
+    override fun thereIsNoTransfer() {
+        actionList.add(actionFactory.world.noTransfer())
     }
 }

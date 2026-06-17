@@ -1,19 +1,19 @@
 package com.anaplan.engineering.azuki.mondex.adapter.kazuki.action
 
-import com.anaplan.engineering.azuki.mondex.adapter.declaration.action.AbsTransferDeclarableAction
+import com.anaplan.engineering.azuki.mondex.adapter.declaration.action.TransferDeclarableAction
 import com.anaplan.engineering.azuki.mondex.adapter.kazuki.ExecutionEnvironment
 import com.anaplan.engineering.azuki.mondex.adapter.kazuki.toTransferDetails
 import com.anaplan.engineering.azuki.mondex.kazuki.Transfer_Module.mk_Transfer
 
-class AbsTransferAction(
+class TransferLostAction(
     transferDetails: Triple<String, String, ULong>,
-    worldName: String = DEFAULT_WORLD,
-) : AbsTransferDeclarableAction(transferDetails, worldName), KazukiAction {
+    worldName: String = DEFAULT_WORLD
+) : TransferDeclarableAction(transferDetails, worldName), KazukiAction {
 
     override fun act(env: ExecutionEnvironment) {
         val td = transferDetails.toTransferDetails()
         val input = mk_Transfer(td)
-        env.set(worldName, env.world(worldName).functions.abstractTransferOkayTD(input, td))
+        env.set(worldName, env.world(worldName).functions.abstractTransferLostTD(input, td))
     }
 
     companion object {

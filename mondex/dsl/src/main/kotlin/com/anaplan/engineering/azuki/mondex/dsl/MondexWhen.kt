@@ -17,20 +17,27 @@ class MondexWhen(private val actionFactory: MondexActionFactory<*>) :
 
     override fun actions() = actionList
 
-    override fun createPurse(balance: ULong, lost: ULong) {
-        actionList.add(actionFactory.purse.create(balance, lost))
+//    override fun createPurse(balance: ULong, lost: ULong) {
+//        actionList.add(actionFactory.purse.create(balance, lost))
+//    }
+//
+//    override fun createWorld(authPurses: Map<String, Pair<ULong, ULong>>) {
+//        actionList.add(actionFactory.world.create(authPurses))
+//    }
+
+    override fun thereIsATransfer(transferDetails: TransferDetails, succeed: Boolean) {
+        when (succeed) {
+            true -> actionList.add(actionFactory.world.transferOkay(
+                Triple(transferDetails.fromPurse, transferDetails.toPurse, transferDetails.value.toULong()))
+            )
+            false -> actionList.add(actionFactory.world.transferLost(
+                Triple(transferDetails.fromPurse, transferDetails.toPurse, transferDetails.value.toULong()))
+            )
+        }
     }
 
-    override fun createWorld(authPurses: Map<String, Pair<ULong, ULong>>) {
-        actionList.add(actionFactory.world.create(authPurses))
-    }
-
-    override fun absTransfer(transferDetails: Triple<String, String, ULong>) {
-        actionList.add(actionFactory.world.absTransfer(transferDetails))
-    }
-
-    override fun absIgnore() {
-        actionList.add(actionFactory.world.absIgnore())
+    override fun thereIsNoTransfer() {
+        actionList.add(actionFactory.world.noTransfer())
     }
 
     override fun parallel(vararg fns: MondexWhen.() -> Unit) {

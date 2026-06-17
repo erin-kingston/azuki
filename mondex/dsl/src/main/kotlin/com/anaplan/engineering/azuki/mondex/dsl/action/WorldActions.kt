@@ -1,10 +1,13 @@
 package com.anaplan.engineering.azuki.mondex.dsl.action
 
+import com.anaplan.engineering.azuki.mondex.dsl.TransferDetails
+import com.anaplan.engineering.azuki.mondex.dsl.TransferOutcome
+
 interface WorldActions : WorldDeclarableActions {
-    fun createWorld(authPurses: Map<String, Pair<ULong, ULong>>)
+//    fun createWorld(authPurses: Map<String, Pair<ULong, ULong>>)
 }
 
 interface WorldDeclarableActions {
-    fun absTransfer(transferDetails: Triple<String, String, ULong>)
-    fun absIgnore()
+    fun thereIsATransfer(transferDetails: TransferDetails, succeed: Boolean = true)
+    fun thereIsNoTransfer()
 }

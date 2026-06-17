@@ -23,10 +23,13 @@ object KazukiPurseActionFactory : PurseActionFactory {
 object KazukiWorldActionFactory : WorldActionFactory {
     override fun create(authPurses: Map<String, Pair<ULong, ULong>>) = CreateWorldAction(authPurses)
 
-    override fun absTransfer(transferDetails: Triple<String, String, ULong>) =
-        AbsTransferAction(transferDetails)
+    override fun transferOkay(transferDetails: Triple<String, String, ULong>) =
+        TransferOkayAction(transferDetails)
 
-    override fun absIgnore() = AbsIgnoreAction()
+    override fun transferLost(transferDetails: Triple<String, String, ULong>) =
+        TransferLostAction(transferDetails)
+
+    override fun noTransfer() = IgnoreAction()
 
     override fun addPersonWithPurse(personName: String, purse: Pair<ULong, ULong>) =
         AddPersonWithPurseAction(personName, purse)
