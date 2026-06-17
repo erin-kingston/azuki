@@ -7,6 +7,5 @@ interface PurseDeclarations {
 }
 
 interface WorldDeclarations {
-    fun thereIsAWorld(authPurses: Map<String, Pair<ULong, ULong>>)
     fun thereIsAWorld(init: WorldBlock.() -> Unit)
 }

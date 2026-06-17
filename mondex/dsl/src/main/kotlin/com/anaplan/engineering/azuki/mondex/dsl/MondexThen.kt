@@ -12,15 +12,18 @@ class MondexThen(private val checkFactory: MondexCheckFactory) : Then<MondexChec
 
     override fun checks() = checkList
 
-    override fun purseExists(purseName: String) {
-        checkList.add(checkFactory.purseExists(purseName, true))
+    override fun purseExists(personName: String) {
+        checkList.add(checkFactory.purseExists(personName, true))
     }
 
-    override fun purseExists(purseName: String, balance: ULong, lost: ULong) {
-        checkList.add(checkFactory.purseExists(purseName, balance, lost, true))
+    override fun purseExists(personName: String, purse: Purse) {
+        checkList.add(checkFactory.purseExists(personName, purse.balance.toULong(), purse.lost.toULong(), true))
     }
 
-    override fun worldExists(authPurses: Map<String, Pair<ULong, ULong>>) {
-        checkList.add(checkFactory.worldExists(authPurses, true))
+    override fun worldExists(init: WorldCheckBlock.() -> Unit) {
+        val worldCheckBlock = WorldCheckBlock(checkFactory)
+        worldCheckBlock.init()
+        checkList.addAll(worldCheckBlock.checks())
+        checkList.add(checkFactory.worldExists(worldCheckBlock.getAuthPurses(), true))
     }
 }

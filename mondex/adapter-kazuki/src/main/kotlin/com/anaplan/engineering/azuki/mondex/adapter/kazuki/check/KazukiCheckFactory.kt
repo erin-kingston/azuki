@@ -7,11 +7,11 @@ import com.anaplan.engineering.azuki.mondex.adapter.kazuki.ExecutionEnvironment
 
 class KazukiCheckFactory : MondexCheckFactory {
 
-    override fun purseExists(purseName: String, result: Boolean) =
-        PurseExistsCheck(purseName, result)
+    override fun purseExists(personName: String, result: Boolean) =
+        PurseExistsCheck(personName, result)
 
-    override fun purseExists(purseName: String, balance: ULong, lost: ULong, result: Boolean) =
-        PurseExistsWithValuesCheck(purseName, balance, lost, result)
+    override fun purseExists(personName: String, balance: ULong, lost: ULong, result: Boolean) =
+        PurseExistsWithValuesCheck(personName, balance, lost, result)
 
     override fun worldExists(authPurses: Map<String, Pair<ULong, ULong>>, result: Boolean) =
         WorldExistsCheck(authPurses, result)

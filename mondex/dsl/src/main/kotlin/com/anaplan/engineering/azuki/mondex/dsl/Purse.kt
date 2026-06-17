@@ -8,4 +8,8 @@ data class Purse(
 fun purse(
     balance: Int,
     lost: Int
-) = Purse(balance, lost)
+): Purse {
+    require(balance >= 0 && lost >= 0) { "Purse values must be natural numbers." }
+    return Purse(balance, lost)
+}
+

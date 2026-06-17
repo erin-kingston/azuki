@@ -1,9 +1,10 @@
 package com.anaplan.engineering.azuki.mondex.dsl.check
 
-import com.anaplan.engineering.azuki.mondex.dsl.WorldBlock
+import com.anaplan.engineering.azuki.mondex.dsl.Purse
+import com.anaplan.engineering.azuki.mondex.dsl.WorldCheckBlock
 
 interface MondexChecks {
-    fun purseExists(purseName: String)
-    fun purseExists(purseName: String, balance: ULong, lost: ULong)
-    fun worldExists(authPurses: Map<String, Pair<ULong, ULong>>)
+    fun purseExists(personName: String)
+    fun purseExists(personName: String, purse: Purse)
+    fun worldExists(init: WorldCheckBlock.() -> Unit)
 }

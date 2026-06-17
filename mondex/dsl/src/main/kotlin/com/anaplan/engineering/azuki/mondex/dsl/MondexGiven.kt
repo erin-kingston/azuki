@@ -18,10 +18,6 @@ class MondexGiven(private val actionFactory: MondexActionFactory<*>) : Given<Mon
         actionList.add(actionFactory.purse.create(balance, lost))
     }
 
-    override fun thereIsAWorld(authPurses: Map<String, Pair<ULong, ULong>>) {
-        actionList.add(actionFactory.world.create(authPurses))
-    }
-
     override fun thereIsAWorld(init: WorldBlock.() -> Unit) {
         val authPurses: Map<String, Pair<ULong, ULong>> = HashMap<String, Pair<ULong, ULong>>()
         actionList.add(actionFactory.world.create(authPurses))

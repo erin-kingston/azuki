@@ -6,27 +6,27 @@ import com.anaplan.engineering.azuki.mondex.adapter.kazuki.ExecutionEnvironment
 import com.anaplan.engineering.azuki.mondex.kazuki.Purse
 
 class PurseExistsCheck(
-    private val purseName: String,
+    private val personName: String,
     private val expected: Boolean,
 ) : PurseExistsBehaviour(), KazukiCheck {
 
     override fun check(env: ExecutionEnvironment): Boolean {
-        val exists = purseName in env.world(MondexDeclarationState.DEFAULT_WORLD).authPurses.dom
+        val exists = personName in env.world(MondexDeclarationState.DEFAULT_WORLD).authPurses.dom
         return exists == expected
     }
 }
 
 class PurseExistsWithValuesCheck(
-    private val purseName: String,
+    private val personName: String,
     private val balance: ULong,
     private val lost: ULong,
     private val expected: Boolean,
 ) : PurseExistsBehaviour(), KazukiCheck {
 
     override fun check(env: ExecutionEnvironment): Boolean {
-        val exists = purseName in env.world(MondexDeclarationState.DEFAULT_WORLD).authPurses.dom
-            && env.world(MondexDeclarationState.DEFAULT_WORLD).authPurses[purseName].balance == balance
-            && env.world(MondexDeclarationState.DEFAULT_WORLD).authPurses[purseName].lost == lost
+        val exists = personName in env.world(MondexDeclarationState.DEFAULT_WORLD).authPurses.dom
+            && env.world(MondexDeclarationState.DEFAULT_WORLD).authPurses[personName].balance == balance
+            && env.world(MondexDeclarationState.DEFAULT_WORLD).authPurses[personName].lost == lost
         return exists == expected
     }
 }

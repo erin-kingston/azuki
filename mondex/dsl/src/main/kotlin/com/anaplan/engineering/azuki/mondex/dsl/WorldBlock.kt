@@ -12,7 +12,7 @@ class WorldBlock(
 
     fun actions(): List<Action> = actionList
 
-    fun personWithPurse(name: String, purse: Pair<ULong, ULong>) {
-        actionList.add(actionFactory.world.addPersonWithPurse(name, purse))
+    fun personWithPurse(personName: String, purse: Purse) {
+        actionList.add(actionFactory.world.addPersonWithPurse(personName, (purse.balance.toULong() to purse.lost.toULong())))
     }
 }
