@@ -49,26 +49,11 @@ fun buildWorld(
     authPurses: Map<String, Pair<ULong, ULong>>,
     operations: List<WorldOperation> = emptyList(),
 ): World {
-    var world = mk_World(
+    val world = mk_World(
         mapping(authPurses.entries) { (name, purse) ->
             mk_(name, mk_Purse(purse.first, purse.second))
         },
     )
-    operations.forEach { operation ->
-        world = when (operation) {
-            is WorldOperation.Transfer -> {
-                val transferDetails = mk_TransferDetails(operation.from, operation.to, operation.value)
-                val input = mk_Transfer(transferDetails)
-                world.functions.abstractTransferOkayTD(input, transferDetails)
-            }
-
-            is WorldOperation.AddPersonWithPurse -> {
-                world.transform(world.authPurses * mk_Mapping(mk_(operation.name, mk_Purse(operation.balance, operation.lost))))
-            }
-
-            WorldOperation.Ignore -> world.functions.abstractIgnore(abstractNullInput)
-        }
-    }
     return world
 }
 

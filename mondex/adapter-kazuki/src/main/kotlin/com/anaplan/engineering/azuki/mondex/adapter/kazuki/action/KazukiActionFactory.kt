@@ -31,9 +31,6 @@ object KazukiWorldActionFactory : WorldActionFactory {
         TransferLostAction(transferDetails)
 
     override fun noTransfer() = IgnoreAction()
-
-    override fun addPersonWithPurse(personName: String, balance: ULong, lost: ULong) =
-        AddPersonWithPurseAction(personName, balance, lost)
 }
 
 interface KazukiAction : Action {

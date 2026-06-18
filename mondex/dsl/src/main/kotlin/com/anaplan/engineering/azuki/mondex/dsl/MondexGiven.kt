@@ -20,11 +20,9 @@ class MondexGiven(private val actionFactory: MondexActionFactory<*>) : Given<Mon
     }
 
     override fun thereIsAWorld(init: WorldBlock.() -> Unit) {
-        val authPurses: Map<String, Pair<ULong, ULong>> = HashMap<String, Pair<ULong, ULong>>()
-        actionList.add(actionFactory.world.create(authPurses))
-        val worldBlock = WorldBlock(actionFactory)
+        val worldBlock = WorldBlock()
         worldBlock.init()
-        actionList.addAll(worldBlock.actions())
+        actionList.add(actionFactory.world.create(worldBlock.getAuthPurses()))
     }
 
     override fun thereIsATransfer(fromPurse: String, toPurse: String, value: Int, succeed: Boolean) {

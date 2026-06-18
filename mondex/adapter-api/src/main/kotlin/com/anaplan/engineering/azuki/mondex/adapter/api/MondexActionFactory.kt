@@ -19,5 +19,4 @@ interface WorldActionFactory {
     fun transferOkay(transferDetails: TransferDetails): Action
     fun transferLost(transferDetails: TransferDetails): Action
     fun noTransfer(): Action
-    fun addPersonWithPurse(personName: String, balance: ULong, lost: ULong): Action
 }
