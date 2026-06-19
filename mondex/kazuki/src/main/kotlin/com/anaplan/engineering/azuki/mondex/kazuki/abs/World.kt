@@ -97,13 +97,13 @@ class WorldFunctions(world: World) {
         }
     )
 
-    private val authentic = function(
+    private val authentic = function (
         command = { name: Name ->
             name in world.authPurses.dom
         }
     )
 
-    private val sufficientFundsProperty = function(
+    private val sufficientFundsProperty = function (
         command = { transferDetails: TransferDetails ->
             transferDetails.value <= world.authPurses[transferDetails.from].balance
         }
