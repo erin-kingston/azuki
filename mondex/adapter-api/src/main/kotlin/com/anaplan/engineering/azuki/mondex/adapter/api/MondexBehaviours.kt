@@ -1,6 +1,5 @@
 package com.anaplan.engineering.azuki.mondex.adapter.api
 
-import com.anaplan.engineering.azuki.core.system.Behavior
 import com.anaplan.engineering.azuki.core.system.ReifiedBehavior
 
 object MondexBehaviours {
@@ -18,11 +17,11 @@ open class CreateWorldBehaviour : ReifiedBehavior {
     override val behavior = MondexBehaviours.CreateWorld
 }
 
-open class AbsTransferBehaviour : ReifiedBehavior {
+open class TransferBehaviour : ReifiedBehavior {
     override val behavior = MondexFunctions.AbsTransfer
 }
 
-open class AbsIgnoreBehaviour : ReifiedBehavior {
+open class IgnoreBehaviour : ReifiedBehavior {
     override val behavior = MondexFunctions.AbsIgnore
 }
 
@@ -32,8 +31,4 @@ open class PurseExistsBehaviour : ReifiedBehavior {
 
 open class WorldExistsBehaviour : ReifiedBehavior {
     override val behavior = MondexBehaviours.WorldExists
-}
-
-open class AddPersonWithPurseBehaviour : ReifiedBehavior {
-    override val behavior = MondexFunctions.AddPersonWithPurse
 }

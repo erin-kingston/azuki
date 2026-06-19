@@ -22,8 +22,10 @@ class MondexThen(private val checkFactory: MondexCheckFactory) : Then<MondexChec
     }
 
     override fun purseOf(personName: String, init: PurseCheckBlock.() -> Unit) {
-        val purseCheckBlock = PurseCheckBlock(personName, checkFactory)
+        val purseCheckBlock = PurseCheckBlock()
         purseCheckBlock.init()
+        checkList.add(checkFactory.purse.purseExists(personName,
+            purseCheckBlock.getBalance()!!, purseCheckBlock.getLost()!!, true))
     }
 
     override fun worldExists(init: WorldCheckBlock.() -> Unit) {

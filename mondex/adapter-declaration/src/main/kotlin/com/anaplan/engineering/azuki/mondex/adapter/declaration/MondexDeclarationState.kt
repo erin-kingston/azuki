@@ -12,31 +12,6 @@ class MondexDeclarationState : DeclarationState() {
         declarations[worldName] = WorldDeclaration(worldName, authPurses, emptyList(), standalone = true)
     }
 
-    fun applyTransfer(worldName: String, transferDetails: TransferDetails) {
-        val world = getDeclaration<WorldDeclaration>(worldName)
-        declarations[worldName] = world.copy(
-            operations = world.operations + WorldOperation.Transfer(
-                transferDetails.fromPurse,
-                transferDetails.toPurse,
-                transferDetails.value,
-            ),
-        )
-    }
-
-    fun applyIgnore(worldName: String) {
-        val world = getDeclaration<WorldDeclaration>(worldName)
-        declarations[worldName] = world.copy(
-            operations = world.operations + WorldOperation.Ignore,
-        )
-    }
-
-    fun applyNewPersonWithPurse(worldName: String, personName: String, balance: ULong, lost: ULong) {
-        val world = getDeclaration<WorldDeclaration>(worldName)
-        declarations[worldName] = world.copy(
-            operations = (world.operations + WorldOperation.AddPersonWithPurse(personName, balance, lost))
-        )
-    }
-
     companion object {
         const val DEFAULT_WORLD = "world"
     }

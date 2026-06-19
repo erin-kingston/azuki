@@ -27,6 +27,15 @@ class BEH1 : MondexScenario() {
         then {
             purseExists(person1, 0, 0)
             purseExists(person2, 5, 1)
+            purseOf(person1) {
+                hasBalance(0)
+                hasLost(0)
+            }
+            purseOf(person2) {
+                hasBalance(5)
+                hasLost(1)
+                hasLost(1)
+            }
             worldExists {
                 personWithPurse(person1, 0, 0)
                 personWithPurse(person2, 5, 1)

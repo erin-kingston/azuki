@@ -5,19 +5,20 @@ import com.anaplan.engineering.azuki.core.system.Check
 import com.anaplan.engineering.azuki.mondex.adapter.api.MondexCheckFactory
 
 @ScenarioDsl
-class PurseCheckBlock(
-    private val personName: String,
-    private val checkFactory: MondexCheckFactory,
-) {
-    private val checkList = mutableListOf<Check>()
+class PurseCheckBlock {
+    private var b: ULong? = null
+    private var l: ULong? = null
 
-    fun checks(): List<Check> = checkList
+    fun getBalance(): ULong? = b
+    fun getLost(): ULong? = l
 
     fun hasBalance(balance: Int) {
-        require(balance >= 0) { "balance must be greater than or equal to zero" }
+        require(balance >= 0) { "balance can't be negative" }
+        b = balance.toULong()
     }
 
-    fun hasLosses(lost: Int) {
-        require(lost >= 0) { "lost must be greater than or equal to zero" }
+    fun hasLost(lost: Int) {
+        require(lost >= 0) { "lost can't be negative" }
+        l = lost.toULong()
     }
 }
