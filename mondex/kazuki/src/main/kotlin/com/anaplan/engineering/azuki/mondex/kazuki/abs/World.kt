@@ -60,9 +60,9 @@ class WorldFunctions(world: World) {
         },
         pre = { a, transferDetails ->
             abstractWorldSecureOperation.pre(a, transferDetails)
-                && authentic(transferDetails.from)
-                && authentic(transferDetails.to)
-                && sufficientFundsProperty(transferDetails)
+                && purseIsAuthentic(transferDetails.from)
+                && purseIsAuthentic(transferDetails.to)
+                && sourceHasSufficientFunds(transferDetails)
                 && transferDetails.from != transferDetails.to
         },
         post = { a, transferDetails, result: World ->
@@ -84,9 +84,9 @@ class WorldFunctions(world: World) {
         },
         pre = { a, transferDetails ->
             abstractWorldSecureOperation.pre(a, transferDetails)
-                && authentic(transferDetails.from)
-                && authentic(transferDetails.to)
-                && sufficientFundsProperty(transferDetails)
+                && purseIsAuthentic(transferDetails.from)
+                && purseIsAuthentic(transferDetails.to)
+                && sourceHasSufficientFunds(transferDetails)
                 && transferDetails.from != transferDetails.to
         },
         post = { a, transferDetails, result: World ->
@@ -97,13 +97,13 @@ class WorldFunctions(world: World) {
         }
     )
 
-    private val authentic = function (
+    private val purseIsAuthentic = function (
         command = { name: Name ->
             name in world.authPurses.dom
         }
     )
 
-    private val sufficientFundsProperty = function (
+    private val sourceHasSufficientFunds = function (
         command = { transferDetails: TransferDetails ->
             transferDetails.value <= world.authPurses[transferDetails.from].balance
         }
