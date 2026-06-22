@@ -2,7 +2,6 @@ package com.anaplan.engineering.azuki.mondex.adapter.declaration
 
 import com.anaplan.engineering.azuki.declaration.DeclarationState
 import com.anaplan.engineering.azuki.mondex.adapter.api.Purse
-import com.anaplan.engineering.azuki.mondex.adapter.declaration.declaration.PurseDeclaration
 import com.anaplan.engineering.azuki.mondex.adapter.declaration.declaration.WorldDeclaration
 
 class MondexDeclarationState : DeclarationState() {

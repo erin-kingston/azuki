@@ -49,15 +49,20 @@ class BEH1 : MondexScenario() {
     fun test2() {
         given {
             thereIsAPurse(person1, 3, 0)
+            thereIsAPurse(person2, 3, 2)
+        }
+        whenever {
+            thereIsATransfer(person1, person2, 1)
         }
         then {
-            purseExists(person1, 3, 0)
-            purseOf(person1) {
-                hasBalance(3)
-                hasLost(0)
+            purseExists(person1, 2, 0)
+            purseOf(person2) {
+                hasBalance(4)
+                hasLost(2)
             }
             worldExists {
-                personWithPurse(person1, 3, 0)
+                personWithPurse(person1, 2, 0)
+                personWithPurse(person2, 4, 2)
             }
         }
     }
