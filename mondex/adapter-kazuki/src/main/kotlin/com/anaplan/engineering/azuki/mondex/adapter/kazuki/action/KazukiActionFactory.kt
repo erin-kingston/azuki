@@ -20,6 +20,7 @@ class KazukiActionFactory : MondexActionFactory<KazukiAction> {
 
 object KazukiPurseActionFactory : PurseActionFactory {
     override fun create(balance: ULong, lost: ULong) = UnsupportedAction
+    override fun create(purseName: String, purse: Purse) = CreatePurseAction(purseName, purse)
 }
 
 object KazukiWorldActionFactory : WorldActionFactory {
