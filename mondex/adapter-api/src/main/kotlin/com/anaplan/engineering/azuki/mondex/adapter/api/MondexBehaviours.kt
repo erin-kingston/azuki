@@ -9,7 +9,7 @@ object MondexBehaviours {
     const val WorldExists = 4
     const val TransferBehaviour = 5
     const val IgnoreBehaviour = 6
-    const val CalculateTotalBalance= 7
+    const val NoValueCreationBehaviour = 7
 }
 
 open class CreatePurseBehaviour : ReifiedBehavior {
@@ -36,6 +36,6 @@ open class WorldExistsBehaviour : ReifiedBehavior {
     override val behavior = MondexBehaviours.WorldExists
 }
 
-open class CalculateTotalBalanceBehaviour : ReifiedBehavior {
-    override val behavior = MondexBehaviours.CalculateTotalBalance
+open class NoValueCreationBehaviour : ReifiedBehavior {
+    override val behavior = MondexBehaviours.NoValueCreationBehaviour
 }

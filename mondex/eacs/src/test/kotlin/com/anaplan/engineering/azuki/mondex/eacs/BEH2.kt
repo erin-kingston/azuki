@@ -97,21 +97,20 @@ class BEH2 : MondexScenario() {
         }
     }
 
-//    @Eac("No value may be created in the system", """
-//        The sum of the all the purses' balances does not increase.
-//    """)
-//    fun noValueCreation() {
-//        given {
-//            thereIsAPurse(person1, 3, 0)
-//            thereIsAPurse(person2, 2, 0)
-//            thereIsAPurse(person3, 4, 0)
-//            // totalAbBalance(purses = (purse1, purse2, purse3), totalBalance = 9)
-//        }
-//        whenever {
-//            thereIsATransfer(person1, person2, 2)
-//        }
-//        then {
-//            //totalAbBalance(purses = (purse1, purse2, purse3), totalBalance = 6)
-//        }
-//    }
+    @Eac("No value may be created in the system", """
+        The sum of all the purses' balances does not increase.
+    """)
+    fun noValueCreation() {
+        given {
+            thereIsAPurse(person1, 3, 0)
+            thereIsAPurse(person2, 2, 0)
+            thereIsAPurse(person3, 4, 0)
+        }
+        whenever {
+            thereIsATransfer(person1, person2, 2)
+        }
+        then {
+            noValueCreation()
+        }
+    }
 }

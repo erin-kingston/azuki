@@ -109,4 +109,10 @@ class WorldFunctions(world: World) {
         }
     )
 
+    val totalBalance = function (
+        command = { authPurses: Mapping<Name, Purse> ->
+            authPurses.rng.fold(0uL) { acc, purse -> acc + purse.balance}
+        }
+    )
+
 }

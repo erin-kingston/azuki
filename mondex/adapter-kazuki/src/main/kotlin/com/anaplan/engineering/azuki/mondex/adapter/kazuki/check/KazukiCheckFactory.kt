@@ -30,6 +30,7 @@ object KazukiWorldCheckFactory : WorldCheckFactory {
     override fun worldExists(authPurses: Map<String, Purse>, result: Boolean) =
         WorldExistsCheck(authPurses, result)
 
+    override fun noValueCreation(result: Boolean) = NoValueCreationCheck(result)
 }
 
 interface KazukiCheck : Check {
