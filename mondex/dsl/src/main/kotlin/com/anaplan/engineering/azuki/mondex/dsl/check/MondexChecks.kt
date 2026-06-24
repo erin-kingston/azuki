@@ -9,4 +9,5 @@ interface MondexChecks {
     fun purseOf(personName: String, init: PurseCheckBlock.() -> Unit)
     fun worldExists(init: WorldCheckBlock.() -> Unit)
     fun noValueCreation()
+    fun allValueAccounted()
 }

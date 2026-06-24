@@ -31,6 +31,8 @@ object KazukiWorldCheckFactory : WorldCheckFactory {
         WorldExistsCheck(authPurses, result)
 
     override fun noValueCreation(result: Boolean) = NoValueCreationCheck(result)
+
+    override fun allValueAccounted(result: Boolean) = AllValueAccountedCheck(result)
 }
 
 interface KazukiCheck : Check {

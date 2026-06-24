@@ -16,4 +16,5 @@ interface PurseCheckFactory {
 interface WorldCheckFactory {
     fun worldExists(authPurses: Map<String, Purse>, result: Boolean): Check
     fun noValueCreation(result: Boolean): Check
+    fun allValueAccounted(result: Boolean): Check
 }

@@ -10,6 +10,7 @@ object MondexBehaviours {
     const val TransferBehaviour = 5
     const val IgnoreBehaviour = 6
     const val NoValueCreationBehaviour = 7
+    const val AllValueAccountedBehaviour = 8
 }
 
 open class CreatePurseBehaviour : ReifiedBehavior {
@@ -38,4 +39,8 @@ open class WorldExistsBehaviour : ReifiedBehavior {
 
 open class NoValueCreationBehaviour : ReifiedBehavior {
     override val behavior = MondexBehaviours.NoValueCreationBehaviour
+}
+
+open class AllValueAccountedBehaviour : ReifiedBehavior {
+    override val behavior = MondexBehaviours.AllValueAccountedBehaviour
 }

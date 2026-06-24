@@ -10,7 +10,7 @@ import com.anaplan.engineering.azuki.mondex.person2
 import com.anaplan.engineering.azuki.mondex.person3
 
 @BEH(MondexBehaviours.TransferBehaviour, MondexFunctions.Transfer, """
-    Transfer money between purses
+    Transfer money securely between purses
 """)
 class BEH2 : MondexScenario() {
 
@@ -23,7 +23,7 @@ class BEH2 : MondexScenario() {
             thereIsAPurse(person2, 2, 0)
         }
         whenever {
-            thereIsATransfer(person1, person2, 2)
+            thereIsATransfer(person1, person2, 2, true)
         }
         then {
             purseOf(person1) {
@@ -80,37 +80,67 @@ class BEH2 : MondexScenario() {
         }
     }
 
-    @Eac("Transfers can securely do nothing")
-    fun ignoreTransferDoesNothing() {
-        given {
-            thereIsAPurse(person1, 3, 0)
-            thereIsAPurse(person2, 2, 0)
-        }
-        whenever {
-            thereIsNoTransfer()
-        }
-        then {
-            worldExists {
-                personWithPurse(person1, 3, 0)
-                personWithPurse(person2, 2, 0)
-            }
-        }
-    }
-
-    @Eac("No value may be created in the system", """
-        The sum of all the purses' balances does not increase.
+    @Eac("A successful transfer will never create value in the world", """
+        The sum of all purses' balances does not increase.
     """)
-    fun noValueCreation() {
+    fun transferImpliesNoValueCreation() {
         given {
             thereIsAPurse(person1, 3, 0)
             thereIsAPurse(person2, 2, 0)
-            thereIsAPurse(person3, 4, 0)
         }
         whenever {
-            thereIsATransfer(person1, person2, 2)
+            thereIsATransfer(person1, person2, 2, true)
         }
         then {
             noValueCreation()
+        }
+    }
+
+    @Eac("A successful transfer will keep all value accounted for in the world", """
+        The sum of all purses' balances and lost components does not change.
+    """)
+    fun transferImpliesAllValueAccounted() {
+        given {
+            thereIsAPurse(person1, 3, 0)
+            thereIsAPurse(person2, 2, 0)
+        }
+        whenever {
+            thereIsATransfer(person1, person2, 2, true)
+        }
+        then {
+            allValueAccounted()
+        }
+    }
+
+    @Eac("A failed transfer will never create value in the world", """
+        The sum of all purses' balances does not increase.
+    """)
+    fun transferFailedImpliesNoValueCreation() {
+        given {
+            thereIsAPurse(person1, 3, 0)
+            thereIsAPurse(person2, 2, 0)
+        }
+        whenever {
+            thereIsATransfer(person1, person2, 2, false)
+        }
+        then {
+            noValueCreation()
+        }
+    }
+
+    @Eac("A failed transfer will keep all value accounted for in the world", """
+        The sum of all purses' balances and lost components does not change.
+    """)
+    fun transferFailedImpliesAllValueAccounted() {
+        given {
+            thereIsAPurse(person1, 3, 0)
+            thereIsAPurse(person2, 2, 0)
+        }
+        whenever {
+            thereIsATransfer(person1, person2, 2, false)
+        }
+        then {
+            allValueAccounted()
         }
     }
 }

@@ -38,4 +38,8 @@ class MondexThen(private val checkFactory: MondexCheckFactory) : Then<MondexChec
     override fun noValueCreation() {
         checkList.add(checkFactory.world.noValueCreation(true))
     }
+
+    override fun allValueAccounted() {
+        checkList.add(checkFactory.world.allValueAccounted(true))
+    }
 }
