@@ -16,16 +16,16 @@ class BEH3: MondexScenario() {
     @Eac("Transfers can securely do nothing")
     fun ignoreTransferDoesNothing() {
         given {
-            thereIsAPurse(person1, 3, 0)
-            thereIsAPurse(person2, 2, 0)
+            thereIsAPurse(person1, 3, 1)
+            thereIsAPurse(person2, 2, 1)
         }
         whenever {
             thereIsNoTransfer()
         }
         then {
             worldExists {
-                personWithPurse(person1, 3, 0)
-                personWithPurse(person2, 2, 0)
+                personWithPurse(person1, 3, 1)
+                personWithPurse(person2, 2, 1)
             }
         }
     }
@@ -35,8 +35,8 @@ class BEH3: MondexScenario() {
     """)
     fun transferFailedImpliesNoValueCreation() {
         given {
-            thereIsAPurse(person1, 3, 0)
-            thereIsAPurse(person2, 2, 0)
+            thereIsAPurse(person1, 3, 1)
+            thereIsAPurse(person2, 2, 1)
         }
         whenever {
             thereIsNoTransfer()
@@ -51,8 +51,8 @@ class BEH3: MondexScenario() {
     """)
     fun transferFailedImpliesAllValueAccounted() {
         given {
-            thereIsAPurse(person1, 3, 0)
-            thereIsAPurse(person2, 2, 0)
+            thereIsAPurse(person1, 3, 1)
+            thereIsAPurse(person2, 2, 1)
         }
         whenever {
             thereIsNoTransfer()

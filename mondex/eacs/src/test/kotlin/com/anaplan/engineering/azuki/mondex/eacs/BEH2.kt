@@ -15,7 +15,8 @@ import com.anaplan.engineering.azuki.mondex.person3
 class BEH2 : MondexScenario() {
 
     @Eac("Value can be transferred from one purse to another with a successful transfer", """
-        Value moves from the sending purse's balance to the receiving purse's balance.
+        Value moves from the sending purse's balance to the receiving purse's balance. The lost
+        components do not change.
     """)
     fun successfulTransfer() {
         given {
@@ -43,7 +44,7 @@ class BEH2 : MondexScenario() {
     """)
     fun failedTransfer() {
         given {
-            thereIsAPurse(person1, 3, 0)
+            thereIsAPurse(person1, 3, 1)
             thereIsAPurse(person2, 2, 0)
         }
         whenever {
@@ -52,7 +53,7 @@ class BEH2 : MondexScenario() {
         then {
             purseOf(person1) {
                 hasBalance(1)
-                hasLost(2)
+                hasLost(3)
             }
             purseOf(person2) {
                 hasBalance(2)
