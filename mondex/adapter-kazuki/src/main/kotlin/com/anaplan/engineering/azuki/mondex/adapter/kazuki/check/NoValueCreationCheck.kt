@@ -10,10 +10,9 @@ class NoValueCreationCheck(
 
     override fun check(env: ExecutionEnvironment): Boolean {
         val beforeWorld = env.world(MondexDeclarationState.BEFORE_DEFAULT_WORLD)
-        val afterWorld = env.world(MondexDeclarationState.DEFAULT_WORLD)
+        val world = env.world(MondexDeclarationState.DEFAULT_WORLD)
 
-        val noCreation = beforeWorld.functions.totalBalance(beforeWorld.authPurses) >=
-            afterWorld.functions.totalBalance(afterWorld.authPurses)
+        val noCreation = world.functions.noValueCreation(beforeWorld.authPurses)
 
         return noCreation == expected
     }
